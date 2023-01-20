@@ -1,14 +1,14 @@
-import React from 'react';
-import PDFPrinter from './PDFPrinter';
+import React from "react";
+import PDFPrinter from "./PDFPrinter";
 
 const ControlPanel = (props) => {
   const { file, pageNumber, numPages, setPageNumber, scale, setScale } = props;
 
   const isFirstPage = pageNumber === 3;
-  const isLastPage = pageNumber === numPages;
+  const isLastPage = pageNumber === 6;
 
-  const firstPageClass = isFirstPage ? 'disabled' : 'clickable';
-  const lastPageClass = isLastPage ? 'disabled' : 'clickable';
+  const firstPageClass = isFirstPage ? "disabled" : "clickable";
+  const lastPageClass = isLastPage ? "disabled" : "clickable";
 
   const goToFirstPage = () => {
     if (!isFirstPage) setPageNumber(3);
@@ -31,8 +31,8 @@ const ControlPanel = (props) => {
   const isMinZoom = scale < 0.6;
   const isMaxZoom = scale >= 2.0;
 
-  const zoomOutClass = isMinZoom ? 'disabled' : 'clickable';
-  const zoomInClass = isMaxZoom ? 'disabled' : 'clickable';
+  const zoomOutClass = isMinZoom ? "disabled" : "clickable";
+  const zoomInClass = isMaxZoom ? "disabled" : "clickable";
 
   const zoomOut = () => {
     if (!isMinZoom) setScale(scale - 0.1);
@@ -54,8 +54,9 @@ const ControlPanel = (props) => {
           onClick={goToPreviousPage}
         />
         <span>
-          Page{' '}
+          Page{" "}
           <input
+            disabled
             name="pageNumber"
             type="number"
             min={1}
@@ -63,7 +64,7 @@ const ControlPanel = (props) => {
             className="p-0 pl-1 mx-2"
             value={pageNumber}
             onChange={onPageChange}
-          />{' '}
+          />{" "}
           of {numPages}
         </span>
         <i

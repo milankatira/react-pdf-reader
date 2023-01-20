@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import Loader from './Loader';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Page, pdfjs } from 'react-pdf';
+import { Document } from "react-pdf/dist/esm/entry.webpack";
+
 import ControlPanel from './ControlPanel';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const PDFReader = () => {
   const [scale, setScale] = useState(1.0);
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(3);
+  const [pageNumber, setPageNumber] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
   function onDocumentLoadSuccess({ numPages }) {
-    console.log(pageNumber, "numPages");
     setNumPages(numPages);
     setIsLoading(false);
   }
@@ -29,10 +30,10 @@ const PDFReader = () => {
           numPages={numPages}
           pageNumber={pageNumber}
           setPageNumber={setPageNumber}
-          file="/assets/docs/file-sample.pdf"
+          file="http://localhost:5000/api/v1/resources/static/assets/uploads/1674235250790.pdf"
         />
         <Document
-          file="/assets/docs/file-sample.pdf"
+          file="http://localhost:5000/api/v1/resources/static/assets/uploads/1674235250790.pdf"
           onLoadSuccess={onDocumentLoadSuccess}
         >
           <Page pageNumber={pageNumber} scale={scale} />
